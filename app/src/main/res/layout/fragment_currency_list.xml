@@ -20,6 +20,6 @@
         app:layout_constraintTop_toBottomOf="@+id/currencySearchView"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="16dp"
-        android:id="@+id/currencyRecyclerView"
+        android:id="@+id/currencyListRecyclerView"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
