@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_vertical_margin"
+    tools:context=".currencyConvertor.ui.DashboardFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fromTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/black"
+        android:text="From:"/>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/fromCurrencyCodeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fromTV"
+        app:layout_constraintBottom_toBottomOf="@+id/fromCurrencyValueTV"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/fromCurrencyValueTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/fromTV"
+        app:layout_constraintStart_toEndOf="@id/fromCurrencyCodeSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="1.00" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fromCurrencySymbolTV"
+        app:layout_constraintTop_toTopOf="@id/fromCurrencyValueTV"
+        app:layout_constraintBottom_toBottomOf="@id/fromCurrencyValueTV"
+        app:layout_constraintStart_toEndOf="@id/fromCurrencyValueTV"
+        android:layout_marginStart="4dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        tools:text="€"
+        />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/fromToDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fromCurrencyValueTV" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toTv"
+        android:layout_marginTop="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fromToDivider"
+        android:textColor="@color/black"
+        android:text="To:"/>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/toCurrencyCodeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toTv"
+        app:layout_constraintBottom_toBottomOf="@+id/toCurrencyValueTV"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/toCurrencyValueTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/toCurrencyCodeSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/toTv"
+        tools:text="1.00" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/currencySymbolTV"
+        app:layout_constraintTop_toTopOf="@id/toCurrencyValueTV"
+        app:layout_constraintBottom_toBottomOf="@id/toCurrencyValueTV"
+        app:layout_constraintStart_toEndOf="@id/toCurrencyValueTV"
+        android:layout_marginStart="4dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        tools:text="€"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/currencyConvertButton"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="48dp"
+        app:layout_constraintTop_toBottomOf="@+id/toCurrencyValueTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Convert"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
