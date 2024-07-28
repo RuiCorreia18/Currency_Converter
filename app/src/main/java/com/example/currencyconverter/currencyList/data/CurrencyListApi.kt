@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface CurrencyListApi {
 
     @GET("latest")
-    fun getLatestRates(): Single<List<CurrencyRatesResponse>>
+    fun getLatestRates(): Single<CurrencyRatesResponse>
 }

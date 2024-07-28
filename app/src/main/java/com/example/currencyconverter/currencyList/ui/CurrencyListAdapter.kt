@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.currencyconverter.currencyList.domain.CurrencyDomainModel
 import com.example.currencyconverter.databinding.ItemCurrencyListBinding
 import java.text.DecimalFormat
+import java.util.Currency
 
 class CurrencyListAdapter :
     ListAdapter<CurrencyDomainModel, CurrencyListAdapter.CurrencyListViewHolder>(CurrencyDiffUtil()) {
@@ -31,7 +32,10 @@ class CurrencyListAdapter :
         fun bind(currency: CurrencyDomainModel) {
             with(binding) {
                 currencyCodeTV.text = currency.code
-                currencyRateTV.text = DecimalFormat("#,##0.00").format(currency.rate)
+                val rate = DecimalFormat("#,##0.00").format(currency.rate)
+                val currency2: Currency = Currency.getInstance(currency.code)
+                val symbol: String = currency2.symbol
+                currencyRateTV.text = "$rate $symbol"
             }
         }
     }

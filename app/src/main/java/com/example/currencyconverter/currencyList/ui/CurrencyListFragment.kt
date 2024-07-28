@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.currencyconverter.currencyList.domain.CurrencyDomainModel
+import com.example.currencyconverter.MainApplication
 import com.example.currencyconverter.databinding.FragmentCurrencyListBinding
+import javax.inject.Inject
 
 class CurrencyListFragment : Fragment() {
 
@@ -17,6 +20,10 @@ class CurrencyListFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private val currencyListAdapter = CurrencyListAdapter()
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: CurrencyListViewModel by viewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -28,19 +35,18 @@ class CurrencyListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity?.application as MainApplication).appComponent.inject(this)
 
-
-        val mockCurrency = listOf(
-            CurrencyDomainModel("EUR", 1.00),
-            CurrencyDomainModel("USD", 1.20),
-            CurrencyDomainModel("GBP", 1.50),
-        )
         binding.currencyListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = currencyListAdapter
         }
 
-        currencyListAdapter.submitList(mockCurrency)
+        viewModel.currencyList.observe(viewLifecycleOwner){ currencyList ->
+            currencyListAdapter.submitList(currencyList)
+        }
+
+        viewModel.getCurrencyList()
 
     }
 
