@@ -2,6 +2,7 @@ package com.example.currencyconverter.di
 
 import android.app.Application
 import com.example.currencyconverter.MainApplication
+import com.example.currencyconverter.currencyConvertor.ui.CurrencyConverterFragment
 import com.example.currencyconverter.currencyList.ui.CurrencyListFragment
 import com.example.currencyconverter.di.viewModel.ViewModelModule
 import dagger.BindsInstance
@@ -24,4 +25,5 @@ interface AppComponent {
 
     fun inject(app: MainApplication)
     fun inject(fragment: CurrencyListFragment)
+    fun inject(fragment: CurrencyConverterFragment)
 }

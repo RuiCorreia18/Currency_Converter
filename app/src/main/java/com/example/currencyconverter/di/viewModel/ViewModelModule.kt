@@ -2,6 +2,7 @@ package com.example.currencyconverter.di.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.currencyconverter.currencyConvertor.ui.CurrencyConverterViewModel
 import com.example.currencyconverter.currencyList.ui.CurrencyListViewModel
 import dagger.Binds
 import dagger.Module
@@ -16,4 +17,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CurrencyListViewModel::class)
     abstract fun bindCurrencyListViewModel(viewModel: CurrencyListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CurrencyConverterViewModel::class)
+    abstract fun bindCurrencyConverterViewModel(viewModel: CurrencyConverterViewModel): ViewModel
 }
