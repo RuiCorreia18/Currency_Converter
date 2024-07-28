@@ -7,8 +7,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -24,6 +28,14 @@ class AppModule {
             .build()
             .create(CurrencyListApi::class.java)
     }
+
+    @Provides
+    @Named("io")
+    fun provideIoScheduler(): Scheduler = Schedulers.io()
+
+    @Provides
+    @Named("main")
+    fun provideMainScheduler(): Scheduler = AndroidSchedulers.mainThread()
 }
 
 @Module
