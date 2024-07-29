@@ -3,6 +3,7 @@ package com.example.currencyconverter.di
 import com.example.currencyconverter.currencyList.data.CurrencyListApi
 import com.example.currencyconverter.currencyList.data.CurrencyListRepositoryImpl
 import com.example.currencyconverter.currencyList.domain.CurrencyListRepository
+import com.example.currencyconverter.shared.SharedViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -36,6 +37,10 @@ class AppModule {
     @Provides
     @Named("main")
     fun provideMainScheduler(): Scheduler = AndroidSchedulers.mainThread()
+
+    @Provides
+    @Singleton
+    fun provideSharedViewModel(): SharedViewModel = SharedViewModel()
 }
 
 @Module

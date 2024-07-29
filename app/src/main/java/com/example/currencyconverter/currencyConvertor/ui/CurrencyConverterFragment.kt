@@ -38,11 +38,22 @@ class CurrencyConverterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity?.application as MainApplication).appComponent.inject(this)
 
-        viewModel.currencyList.observe(viewLifecycleOwner){ codes ->
+        //Update spinner with currency list
+        viewModel.currencyList.observe(viewLifecycleOwner) { codes ->
             val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, codes)
-            binding.fromCurrencyCodeSpinner.adapter = adapter
-            binding.toCurrencyCodeSpinner.adapter = adapter
+            with(binding) {
+                fromCurrencyCodeSpinner.adapter = adapter
+                toCurrencyCodeSpinner.adapter = adapter
+            }
         }
+
+        /**
+         * TODO
+         *  - on spinner change clear input values
+         *  - on values change clear other values
+         *  - fetch value to ask convertion
+         *  - send and fill result of convertion
+         */
     }
 
     override fun onDestroyView() {

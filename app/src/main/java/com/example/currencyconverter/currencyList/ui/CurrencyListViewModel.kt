@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.currencyconverter.currencyList.domain.CurrencyDomainModel
 import com.example.currencyconverter.currencyList.domain.GetLatestRatesUseCase
+import com.example.currencyconverter.shared.SharedViewModel
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
@@ -16,6 +17,7 @@ class CurrencyListViewModel @Inject constructor(
     private val getLatestRatesUseCase: GetLatestRatesUseCase,
     @Named("io") private val ioSchedulers: Scheduler,
     @Named("main") private val mainSchedulers: Scheduler,
+    private val sharedViewModel: SharedViewModel
 ) : ViewModel() {
 
     private val _currencyList = MutableLiveData<List<CurrencyDomainModel>>()
@@ -28,6 +30,8 @@ class CurrencyListViewModel @Inject constructor(
             .observeOn(mainSchedulers)
             .subscribeBy(
                 onSuccess = { rates ->
+                    //Stores currency codes in shared view model so we can use it on the convertor
+                    sharedViewModel.setCurrencyListLiveData(rates.map { it.code })
                     _currencyList.value = rates
                 }
             )
