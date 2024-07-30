@@ -1,5 +1,8 @@
 package com.example.currencyconverter.di
 
+import com.example.currencyconverter.currencyConverter.data.CurrencyConverterRepositoryImpl
+import com.example.currencyconverter.currencyConverter.data.CurrencyConvertorApi
+import com.example.currencyconverter.currencyConverter.domain.CurrencyConverterRepository
 import com.example.currencyconverter.currencyList.data.CurrencyListApi
 import com.example.currencyconverter.currencyList.data.CurrencyListRepositoryImpl
 import com.example.currencyconverter.currencyList.domain.CurrencyListRepository
@@ -19,15 +22,28 @@ import javax.inject.Singleton
 @Module
 class AppModule {
 
+    //How to create Retrofit instance
     @Singleton
     @Provides
-    fun provideRetrofit(): CurrencyListApi {
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.frankfurter.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
-            .create(CurrencyListApi::class.java)
+    }
+
+    //How to create each API using the same retrofit instance
+    @Singleton
+    @Provides
+    fun provideCurrencyListApi(retrofit: Retrofit): CurrencyListApi {
+        return retrofit.create(CurrencyListApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCurrencyConvertorApi(retrofit: Retrofit): CurrencyConvertorApi {
+        return retrofit.create(CurrencyConvertorApi::class.java)
     }
 
     @Provides
@@ -47,4 +63,7 @@ class AppModule {
 abstract class AppBindModule {
     @Binds
     abstract fun bindRepository(repositoryImpl: CurrencyListRepositoryImpl): CurrencyListRepository
+
+    @Binds
+    abstract fun bindConverterRepository(repositoryImpl: CurrencyConverterRepositoryImpl): CurrencyConverterRepository
 }

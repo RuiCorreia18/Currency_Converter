@@ -2,7 +2,7 @@ package com.example.currencyconverter.di.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.currencyconverter.currencyConvertor.ui.CurrencyConverterViewModel
+import com.example.currencyconverter.currencyConverter.ui.CurrencyConverterViewModel
 import com.example.currencyconverter.currencyList.ui.CurrencyListViewModel
 import dagger.Binds
 import dagger.Module

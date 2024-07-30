@@ -2,7 +2,7 @@ package com.example.currencyconverter.di
 
 import android.app.Application
 import com.example.currencyconverter.MainApplication
-import com.example.currencyconverter.currencyConvertor.ui.CurrencyConverterFragment
+import com.example.currencyconverter.currencyConverter.ui.CurrencyConverterFragment
 import com.example.currencyconverter.currencyList.ui.CurrencyListFragment
 import com.example.currencyconverter.di.viewModel.ViewModelModule
 import dagger.BindsInstance
