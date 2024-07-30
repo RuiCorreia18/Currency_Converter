@@ -54,7 +54,7 @@ class CurrencyConverterFragment : Fragment() {
         }
 
         viewModel.currencyConversion.observe(viewLifecycleOwner) { conversion ->
-            binding.toCurrencyValueTV.setText(conversion.toCurrencyValue.toString())
+            binding.toCurrencyValueTV.setText(conversion)
         }
 
         binding.fromCurrencyCodeSpinner.onItemSelectedListener = clearToValue()
@@ -62,10 +62,10 @@ class CurrencyConverterFragment : Fragment() {
 
         /**
          * TODO
-         *  - on spinner change clear input values
-         *  - on values change clear other values
-         *  - fetch value to ask conversion
-         *  - send and fill result of conversion
+         *  - on spinner change clear input values DONE
+         *  - fetch value to ask conversion DONE
+         *  - send and fill result of conversion DONE
+         *  - Dont allow enter on inputtext
          */
 
         binding.currencyConvertButton.setOnClickListener {
@@ -79,9 +79,7 @@ class CurrencyConverterFragment : Fragment() {
     }
 
     private fun clearToValue() = object : AdapterView.OnItemSelectedListener {
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-
-        }
+        override fun onNothingSelected(parent: AdapterView<*>?) = Unit
 
         override fun onItemSelected(
             parent: AdapterView<*>?,

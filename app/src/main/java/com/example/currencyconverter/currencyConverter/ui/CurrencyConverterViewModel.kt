@@ -3,13 +3,13 @@ package com.example.currencyconverter.currencyConverter.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.currencyconverter.currencyConverter.domain.CurrencyConverterDomainModel
 import com.example.currencyconverter.currencyConverter.domain.GetCurrencyConversionUseCase
 import com.example.currencyconverter.shared.SharedViewModel
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
+import java.text.DecimalFormat
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -25,8 +25,8 @@ class CurrencyConverterViewModel @Inject constructor(
     private val _currencyList = MutableLiveData<List<String>>()
     val currencyList: LiveData<List<String>> = _currencyList
 
-    private val _currencyConversion = MutableLiveData<CurrencyConverterDomainModel>()
-    val currencyConversion: LiveData<CurrencyConverterDomainModel> = _currencyConversion
+    private val _currencyConversion = MutableLiveData<String>()
+    val currencyConversion: LiveData<String> = _currencyConversion
 
     init {
         //Get currency list fetched on currencyList from sharedview model
@@ -40,7 +40,7 @@ class CurrencyConverterViewModel @Inject constructor(
             .observeOn(mainSchedulers)
             .subscribeBy(
                 onSuccess = {
-                    _currencyConversion.value = it
+                    _currencyConversion.value = DecimalFormat("#,##0.00").format(it)
                 }
             )
             .addTo(compositeDisposable)
