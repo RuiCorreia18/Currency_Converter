@@ -3,7 +3,6 @@ package com.example.currencyconverter.currencyList.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.currencyconverter.currencyList.domain.CurrencyDomainModel
 import com.example.currencyconverter.currencyList.domain.GetLatestRatesUseCase
 import com.example.currencyconverter.shared.SharedViewModel
 import io.reactivex.rxjava3.core.Scheduler
@@ -21,10 +20,10 @@ class CurrencyListViewModel @Inject constructor(
 ) : ViewModel() {
 
     //TODO Create UIModel
-    private val _currencyList = MutableLiveData<List<CurrencyDomainModel>>()
-    val currencyList: LiveData<List<CurrencyDomainModel>> = _currencyList
+    private val _currencyList = MutableLiveData<List<CurrencyUIModel>>()
+    val currencyList: LiveData<List<CurrencyUIModel>> = _currencyList
 
-    private val tempCurrencyList = mutableListOf<CurrencyDomainModel>()
+    private val tempCurrencyList = mutableListOf<CurrencyUIModel>()
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
@@ -39,7 +38,7 @@ class CurrencyListViewModel @Inject constructor(
                 onSuccess = { rates ->
                     //Stores currency codes in shared view model so we can use it on the convertor
                     sharedViewModel.setCurrencyListLiveData(rates.map { it.code })
-                    _currencyList.value = rates
+                    _currencyList.value = rates.map { it.toUIModel() }
                 },
                 onError = { _errorMessage.value = "Error getting list of currencies" }
             )

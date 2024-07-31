@@ -5,13 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.currencyconverter.currencyList.domain.CurrencyDomainModel
 import com.example.currencyconverter.databinding.ItemCurrencyListBinding
-import java.text.DecimalFormat
-import java.util.Currency
 
 class CurrencyListAdapter :
-    ListAdapter<CurrencyDomainModel, CurrencyListAdapter.CurrencyListViewHolder>(CurrencyDiffUtil()) {
+    ListAdapter<CurrencyUIModel, CurrencyListAdapter.CurrencyListViewHolder>(CurrencyDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyListViewHolder {
         val itemBinding = ItemCurrencyListBinding.inflate(
@@ -29,28 +26,25 @@ class CurrencyListAdapter :
         private val binding: ItemCurrencyListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(currency: CurrencyDomainModel) {
+        fun bind(currency: CurrencyUIModel) {
             with(binding) {
                 currencyCodeTV.text = currency.code
-                val rate = DecimalFormat("#,##0.00").format(currency.rate)
-                val currency2: Currency = Currency.getInstance(currency.code)
-                val symbol: String = currency2.symbol
-                currencyRateTV.text = "$rate $symbol"
+                currencyRateTV.text = "${currency.rate} ${currency.symbol}"
             }
         }
     }
 
-    class CurrencyDiffUtil : DiffUtil.ItemCallback<CurrencyDomainModel>() {
+    class CurrencyDiffUtil : DiffUtil.ItemCallback<CurrencyUIModel>() {
         override fun areItemsTheSame(
-            oldItem: CurrencyDomainModel,
-            newItem: CurrencyDomainModel
+            oldItem: CurrencyUIModel,
+            newItem: CurrencyUIModel
         ): Boolean {
             return oldItem.code == newItem.code && oldItem.rate == oldItem.rate
         }
 
         override fun areContentsTheSame(
-            oldItem: CurrencyDomainModel,
-            newItem: CurrencyDomainModel
+            oldItem: CurrencyUIModel,
+            newItem: CurrencyUIModel
         ): Boolean {
             return oldItem == newItem
         }
