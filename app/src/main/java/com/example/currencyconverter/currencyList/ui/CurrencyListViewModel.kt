@@ -19,7 +19,6 @@ class CurrencyListViewModel @Inject constructor(
     private val sharedViewModel: SharedViewModel
 ) : ViewModel() {
 
-    //TODO Create UIModel
     private val _currencyList = MutableLiveData<List<CurrencyUIModel>>()
     val currencyList: LiveData<List<CurrencyUIModel>> = _currencyList
 
