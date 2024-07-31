@@ -36,13 +36,18 @@ class CurrencyListViewModelTest {
 
     @Test
     fun `when getLatestRates success should fill livedata`() {
-        val expected = listOf(
+        val response = listOf(
             CurrencyDomainModel("EUR", 1.00),
             CurrencyDomainModel("USD", 1.20),
             CurrencyDomainModel("GBP", 1.30),
         )
+        val expected = listOf(
+            CurrencyUIModel("EUR", "1.00", "€"),
+            CurrencyUIModel("USD", "1.20", "$"),
+            CurrencyUIModel("GBP", "1.30", "£"),
+        )
 
-        every { getLatestRatesUseCase() } returns Single.just(expected)
+        every { getLatestRatesUseCase() } returns Single.just(response)
 
         viewModel.getCurrencyList()
 
@@ -75,7 +80,7 @@ class CurrencyListViewModelTest {
 
         viewModel.searchCurrency("US")
 
-        val expectedList = listOf(CurrencyDomainModel("USD", 1.0))
+        val expectedList = listOf(CurrencyUIModel("USD", "1.00", "$"))
         assertEquals(expectedList, viewModel.currencyList.value)
     }
 
@@ -86,13 +91,19 @@ class CurrencyListViewModelTest {
             CurrencyDomainModel("EUR", 1.0),
             CurrencyDomainModel("GBP", 1.0)
         )
+        val expected = listOf(
+            CurrencyUIModel("USD", "1.00", "$"),
+            CurrencyUIModel("EUR", "1.00", "€"),
+            CurrencyUIModel("GBP", "1.00", "£"),
+        )
+
         //Init currencyList
         every { getLatestRatesUseCase() } returns Single.just(initialList)
         viewModel.getCurrencyList()
 
         viewModel.searchCurrency("")
 
-        assertEquals(initialList, viewModel.currencyList.value)
+        assertEquals(expected, viewModel.currencyList.value)
     }
 
     @Test
@@ -102,13 +113,19 @@ class CurrencyListViewModelTest {
             CurrencyDomainModel("EUR", 1.0),
             CurrencyDomainModel("GBP", 1.0)
         )
+        val expected = listOf(
+            CurrencyUIModel("USD", "1.00", "$"),
+            CurrencyUIModel("EUR", "1.00", "€"),
+            CurrencyUIModel("GBP", "1.00", "£"),
+        )
+
         //Init currencyList
         every { getLatestRatesUseCase() } returns Single.just(initialList)
         viewModel.getCurrencyList()
 
         viewModel.searchCurrency(null)
 
-        assertEquals(initialList, viewModel.currencyList.value)
+        assertEquals(expected, viewModel.currencyList.value)
     }
 
     @Test
