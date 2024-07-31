@@ -2,4 +2,7 @@
     <string name="app_name">Currency Converter</string>
     <string name="title_home">List</string>
     <string name="title_dashboard">Convertor</string>
+    <string name="convert">Convert</string>
+    <string name="to">To:</string>
+    <string name="from">From:</string>
 </resources>

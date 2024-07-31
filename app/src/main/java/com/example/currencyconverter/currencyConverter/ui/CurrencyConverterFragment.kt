@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SpinnerAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -49,12 +50,17 @@ class CurrencyConverterFragment : Fragment() {
                 fromCurrencyCodeSpinner.adapter = spinnerAdapter
                 fromCurrencyCodeSpinner.setSelection(0)
                 toCurrencyCodeSpinner.adapter = spinnerAdapter
+                //selection 1 so don't show the same currency
                 toCurrencyCodeSpinner.setSelection(1)
             }
         }
 
         viewModel.currencyConversion.observe(viewLifecycleOwner) { conversion ->
-            binding.toCurrencyValueTV.setText(conversion)
+            binding.toCurrencyValueTV.text = conversion
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
         }
 
         binding.fromCurrencyCodeSpinner.onItemSelectedListener = clearToValue()
@@ -65,7 +71,7 @@ class CurrencyConverterFragment : Fragment() {
          *  - on spinner change clear input values DONE
          *  - fetch value to ask conversion DONE
          *  - send and fill result of conversion DONE
-         *  - Dont allow enter on inputtext
+         *  - Dont allow enter on inputtext also numeric DONE
          */
 
         binding.currencyConvertButton.setOnClickListener {
@@ -87,7 +93,7 @@ class CurrencyConverterFragment : Fragment() {
             position: Int,
             id: Long
         ) {
-            binding.toCurrencyValueTV.setText("")
+            binding.toCurrencyValueTV.text = ""
         }
 
     }

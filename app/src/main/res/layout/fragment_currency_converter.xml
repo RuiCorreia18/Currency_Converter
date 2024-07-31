@@ -7,7 +7,6 @@
     android:layout_margin="@dimen/activity_vertical_margin"
     tools:context=".currencyConverter.ui.CurrencyConverterFragment">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/black"
-        android:text="From:"/>
+        android:text="@string/from"/>
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/fromCurrencyCodeSpinner"
@@ -32,20 +31,8 @@
         app:layout_constraintTop_toBottomOf="@+id/fromTV"
         app:layout_constraintStart_toEndOf="@id/fromCurrencyCodeSpinner"
         app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="numberDecimal"
         tools:text="1.00" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fromCurrencySymbolTV"
-        app:layout_constraintTop_toTopOf="@id/fromCurrencyValueTV"
-        app:layout_constraintBottom_toBottomOf="@id/fromCurrencyValueTV"
-        app:layout_constraintStart_toEndOf="@id/fromCurrencyValueTV"
-        android:layout_marginStart="4dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        tools:text="€"
-        />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/fromToDivider"
@@ -55,7 +42,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fromCurrencyValueTV" />
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fromToDivider"
         android:textColor="@color/black"
-        android:text="To:"/>
+        android:text="@string/to"/>
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/toCurrencyCodeSpinner"
@@ -74,27 +60,17 @@
         app:layout_constraintTop_toBottomOf="@+id/toTv"
         app:layout_constraintBottom_toBottomOf="@+id/toCurrencyValueTV"/>
 
-    <com.google.android.material.textfield.TextInputEditText
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/toCurrencyValueTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/toCurrencyCodeSpinner"
         app:layout_constraintTop_toBottomOf="@+id/toTv"
-        tools:text="1.00" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/currencySymbolTV"
-        app:layout_constraintTop_toTopOf="@id/toCurrencyValueTV"
-        app:layout_constraintBottom_toBottomOf="@id/toCurrencyValueTV"
-        app:layout_constraintStart_toEndOf="@id/toCurrencyValueTV"
-        android:layout_marginStart="4dp"
+        android:clickable="false"
         android:textStyle="bold"
-        android:textSize="18sp"
-        tools:text="€"
-        />
+        android:textSize="20sp"
+        tools:text="1.00" />
 
     <Button
         android:layout_width="wrap_content"
@@ -104,5 +80,5 @@
         android:layout_marginEnd="48dp"
         app:layout_constraintTop_toBottomOf="@+id/toCurrencyValueTV"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Convert"/>
+        android:text="@string/convert"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

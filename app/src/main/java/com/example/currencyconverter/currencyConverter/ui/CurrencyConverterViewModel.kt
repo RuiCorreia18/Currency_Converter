@@ -28,8 +28,11 @@ class CurrencyConverterViewModel @Inject constructor(
     private val _currencyConversion = MutableLiveData<String>()
     val currencyConversion: LiveData<String> = _currencyConversion
 
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> = _errorMessage
+
     init {
-        //Get currency list fetched on currencyList from sharedview model
+        //Get currency list fetched on currencyList from shared view model
         _currencyList.value = sharedViewModel.getCurrencyListLiveData().value
         sharedViewModel.setCurrencyListLiveData(emptyList())
     }
@@ -41,7 +44,8 @@ class CurrencyConverterViewModel @Inject constructor(
             .subscribeBy(
                 onSuccess = {
                     _currencyConversion.value = DecimalFormat("#,##0.00").format(it)
-                }
+                },
+                onError = { _errorMessage.value = "Error converting currencies" }
             )
             .addTo(compositeDisposable)
     }

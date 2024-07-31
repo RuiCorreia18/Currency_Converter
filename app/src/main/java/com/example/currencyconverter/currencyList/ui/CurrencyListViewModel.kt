@@ -20,8 +20,14 @@ class CurrencyListViewModel @Inject constructor(
     private val sharedViewModel: SharedViewModel
 ) : ViewModel() {
 
+    //TODO Create UIModel
+    //TODO make search work
     private val _currencyList = MutableLiveData<List<CurrencyDomainModel>>()
     val currencyList: LiveData<List<CurrencyDomainModel>> = _currencyList
+
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> = _errorMessage
+
     private val compositeDisposable by lazy { CompositeDisposable() }
 
     fun getCurrencyList() {
@@ -33,7 +39,8 @@ class CurrencyListViewModel @Inject constructor(
                     //Stores currency codes in shared view model so we can use it on the convertor
                     sharedViewModel.setCurrencyListLiveData(rates.map { it.code })
                     _currencyList.value = rates
-                }
+                },
+                onError = { _errorMessage.value = "Error getting list of currencies"}
             )
             .addTo(compositeDisposable)
     }
