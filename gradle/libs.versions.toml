@@ -19,6 +19,8 @@ rxandroid = "3.0.2"
 rxkotlin = "3.0.1"
 ksp = "2.0.0-1.0.21"
 daggerCompiler = "2.51"
+mockk = "1.13.3"
+coreTesting = "2.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +44,8 @@ dagger-android-processor = { module = "com.google.dagger:dagger-android-processo
 dagger = { module = "com.google.dagger:dagger", version.ref = "daggerCompiler" }
 dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "daggerCompiler" }
 dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "daggerCompiler" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
