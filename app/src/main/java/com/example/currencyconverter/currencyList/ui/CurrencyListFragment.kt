@@ -43,7 +43,7 @@ class CurrencyListFragment : Fragment() {
             adapter = currencyListAdapter
         }
 
-        viewModel.currencyList.observe(viewLifecycleOwner){ currencyList ->
+        viewModel.currencyList.observe(viewLifecycleOwner) { currencyList ->
             currencyListAdapter.submitList(currencyList)
         }
 
@@ -60,18 +60,14 @@ class CurrencyListFragment : Fragment() {
     private fun hookSearchListener() {
         binding.currencySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                TODO("Not yet implemented")
+                return true
             }
 
-
             override fun onQueryTextChange(query: String?): Boolean {
-                //if (!query.isNullOrEmpty()) {
-                    viewModel.searchCurrency(query)
-                //}
+                viewModel.searchCurrency(query)
                 return true
             }
         })
-
     }
 
     override fun onDestroyView() {

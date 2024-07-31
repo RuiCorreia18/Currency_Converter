@@ -110,4 +110,21 @@ class CurrencyListViewModelTest {
 
         assertEquals(initialList, viewModel.currencyList.value)
     }
+
+    @Test
+    fun `when searchCurrency string not a currency should return empty list`(){
+        val initialList = listOf(
+            CurrencyDomainModel("USD", 1.0),
+            CurrencyDomainModel("EUR", 1.0),
+            CurrencyDomainModel("GBP", 1.0)
+        )
+        //Init currencyList
+        every { getLatestRatesUseCase() } returns Single.just(initialList)
+        viewModel.getCurrencyList()
+
+        viewModel.searchCurrency("CURRENCY")
+
+        val expected = emptyList<CurrencyDomainModel>()
+        assertEquals(expected, viewModel.currencyList.value)
+    }
 }
