@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -50,7 +51,26 @@ class CurrencyListFragment : Fragment() {
             Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
         }
 
+        hookSearchListener()
+
         viewModel.getCurrencyList()
+
+    }
+
+    private fun hookSearchListener() {
+        binding.currencySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                TODO("Not yet implemented")
+            }
+
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                //if (!query.isNullOrEmpty()) {
+                    viewModel.searchCurrency(query)
+                //}
+                return true
+            }
+        })
 
     }
 

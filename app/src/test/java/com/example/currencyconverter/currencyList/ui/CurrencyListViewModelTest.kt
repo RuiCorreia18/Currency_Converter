@@ -61,4 +61,53 @@ class CurrencyListViewModelTest {
         verify { sharedViewModel wasNot Called }
         verify { errorMessageObserver.onChanged(errorMessage) }
     }
+
+    @Test
+    fun `when searchCurrency string is not empty should filter currency list`(){
+        val initialList = listOf(
+            CurrencyDomainModel("USD", 1.0),
+            CurrencyDomainModel("EUR", 1.0),
+            CurrencyDomainModel("GBP", 1.0)
+        )
+        //Init currencyList
+        every { getLatestRatesUseCase() } returns Single.just(initialList)
+        viewModel.getCurrencyList()
+
+        viewModel.searchCurrency("US")
+
+        val expectedList = listOf(CurrencyDomainModel("USD", 1.0))
+        assertEquals(expectedList, viewModel.currencyList.value)
+    }
+
+    @Test
+    fun `when searchCurrency string is empty should return full list`(){
+        val initialList = listOf(
+            CurrencyDomainModel("USD", 1.0),
+            CurrencyDomainModel("EUR", 1.0),
+            CurrencyDomainModel("GBP", 1.0)
+        )
+        //Init currencyList
+        every { getLatestRatesUseCase() } returns Single.just(initialList)
+        viewModel.getCurrencyList()
+
+        viewModel.searchCurrency("")
+
+        assertEquals(initialList, viewModel.currencyList.value)
+    }
+
+    @Test
+    fun `when searchCurrency string is null should return full list`(){
+        val initialList = listOf(
+            CurrencyDomainModel("USD", 1.0),
+            CurrencyDomainModel("EUR", 1.0),
+            CurrencyDomainModel("GBP", 1.0)
+        )
+        //Init currencyList
+        every { getLatestRatesUseCase() } returns Single.just(initialList)
+        viewModel.getCurrencyList()
+
+        viewModel.searchCurrency(null)
+
+        assertEquals(initialList, viewModel.currencyList.value)
+    }
 }

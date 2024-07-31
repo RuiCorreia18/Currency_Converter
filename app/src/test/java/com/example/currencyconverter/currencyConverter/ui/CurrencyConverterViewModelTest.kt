@@ -74,6 +74,7 @@ class CurrencyConverterViewModelTest {
 
         val observer = mockk<Observer<String>>(relaxed = true)
         viewModel.currencyConversion.observeForever(observer)
+
         verify { observer.onChanged(formattedAmount) }
         assertEquals(formattedAmount, viewModel.currencyConversion.value)
     }
@@ -97,6 +98,7 @@ class CurrencyConverterViewModelTest {
 
         val observer = mockk<Observer<String>>(relaxed = true)
         viewModel.errorMessage.observeForever(observer)
+
         verify { observer.onChanged("Error converting currencies") }
         assertEquals("Error converting currencies", viewModel.errorMessage.value)
     }

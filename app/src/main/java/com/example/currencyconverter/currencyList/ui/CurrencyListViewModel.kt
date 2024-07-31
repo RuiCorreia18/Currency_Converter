@@ -21,9 +21,10 @@ class CurrencyListViewModel @Inject constructor(
 ) : ViewModel() {
 
     //TODO Create UIModel
-    //TODO make search work
     private val _currencyList = MutableLiveData<List<CurrencyDomainModel>>()
     val currencyList: LiveData<List<CurrencyDomainModel>> = _currencyList
+
+    private val tempCurrencyList = mutableListOf<CurrencyDomainModel>()
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
@@ -40,9 +41,17 @@ class CurrencyListViewModel @Inject constructor(
                     sharedViewModel.setCurrencyListLiveData(rates.map { it.code })
                     _currencyList.value = rates
                 },
-                onError = { _errorMessage.value = "Error getting list of currencies"}
+                onError = { _errorMessage.value = "Error getting list of currencies" }
             )
             .addTo(compositeDisposable)
+    }
+
+    fun searchCurrency(currency: String?) {
+        val currencySearch = currency ?: ""
+        if (tempCurrencyList.isEmpty()) currencyList.value?.let { tempCurrencyList.addAll(it) }
+        _currencyList.value = tempCurrencyList.filter {
+            it.code.lowercase().contains(currencySearch.lowercase())
+        }
     }
 
     override fun onCleared() {
