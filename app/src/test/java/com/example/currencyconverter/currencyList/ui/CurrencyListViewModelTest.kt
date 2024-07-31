@@ -20,6 +20,7 @@ class CurrencyListViewModelTest {
     private val getLatestRatesUseCase: GetLatestRatesUseCase = mockk()
     private val ioSchedulers: Scheduler = Schedulers.trampoline()
     private val mainSchedulers: Scheduler = Schedulers.trampoline()
+    //relaxed used so i dont need to configure all functions of sharedviewmodel
     private val sharedViewModel: SharedViewModel = mockk(relaxed = true)
 
 

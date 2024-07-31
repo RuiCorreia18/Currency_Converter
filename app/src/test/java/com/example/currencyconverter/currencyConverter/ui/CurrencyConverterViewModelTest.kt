@@ -1,6 +1,7 @@
 package com.example.currencyconverter.currencyConverter.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.currencyconverter.currencyConverter.domain.GetCurrencyConversionUseCase
 import com.example.currencyconverter.shared.SharedViewModel
@@ -14,41 +15,44 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
 class CurrencyConverterViewModelTest {
     private val currencyConversionUseCase: GetCurrencyConversionUseCase = mockk()
     private val ioSchedulers: Scheduler = Schedulers.trampoline()
     private val mainSchedulers: Scheduler = Schedulers.trampoline()
-    private val sharedViewModel: SharedViewModel = mockk(relaxed = true)
+    private val sharedViewModel: SharedViewModel = mockk()
 
-    private val currencyList = listOf("EUR", "USD", "GBP")
-
-    private val viewModel = CurrencyConverterViewModel(
-        ioSchedulers,
-        mainSchedulers,
-        sharedViewModel,
-        currencyConversionUseCase
-    )
+    private lateinit var viewModel: CurrencyConverterViewModel
 
     @get:Rule
     var rule = InstantTaskExecutorRule()
 
     @Before
     fun setup() {
-        sharedViewModel.setCurrencyListLiveData(currencyList)
+        // Mocking the LiveData in SharedViewModel
+        val currencyListLiveData = MutableLiveData<List<String>>()
+        currencyListLiveData.value = listOf("EUR", "USD", "GBP")
+        every { sharedViewModel.getCurrencyListLiveData() } returns currencyListLiveData
+
+        //need to setup viewmodel after all dependency are ready
+        viewModel = CurrencyConverterViewModel(
+            ioSchedulers,
+            mainSchedulers,
+            sharedViewModel,
+            currencyConversionUseCase
+        )
     }
 
-    //TODO fix init test
-    /*@Test
+    @Test
     fun `should update currencyList from shared view model`() {
+        val expectedCurrencyList = listOf("EUR", "USD", "GBP")
 
-        viewModel
+        //relaxed allows return default values and not errors on function like onchange
+        val observer: Observer<List<String>> = mockk(relaxed = true)
+        viewModel.currencyList.observeForever(observer)
 
-        assertEquals(currencyList, viewModel.currencyList.value)
-    }*/
+        assertEquals(expectedCurrencyList, viewModel.currencyList.value)
+    }
 
     @Test
     fun `should convert currency and update currencyConversion LiveData`() {
@@ -96,5 +100,4 @@ class CurrencyConverterViewModelTest {
         verify { observer.onChanged("Error converting currencies") }
         assertEquals("Error converting currencies", viewModel.errorMessage.value)
     }
-
 }
