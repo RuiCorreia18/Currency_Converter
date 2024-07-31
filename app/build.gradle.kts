@@ -71,4 +71,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.mockk)
     testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.robolectric)
 }

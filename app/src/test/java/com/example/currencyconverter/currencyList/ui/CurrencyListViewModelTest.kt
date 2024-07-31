@@ -22,7 +22,6 @@ class CurrencyListViewModelTest {
     private val mainSchedulers: Scheduler = Schedulers.trampoline()
     private val sharedViewModel: SharedViewModel = mockk(relaxed = true)
 
-    private var errorMessageObserver: Observer<String> = mockk()
 
     private val viewModel = CurrencyListViewModel(
         getLatestRatesUseCase,
@@ -54,11 +53,11 @@ class CurrencyListViewModelTest {
         val errorMessage = "Error getting list of currencies"
         every { getLatestRatesUseCase() } returns Single.error(Exception(errorMessage))
 
+        val errorMessageObserver: Observer<String> = mockk()
         viewModel.errorMessage.observeForever(errorMessageObserver)
         viewModel.getCurrencyList()
 
         verify { sharedViewModel wasNot Called }
         verify { errorMessageObserver.onChanged(errorMessage) }
     }
-
 }

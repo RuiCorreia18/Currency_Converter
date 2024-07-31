@@ -26,7 +26,7 @@ class GetLatestRatesUseCaseTest {
     }
 
     @Test
-    fun `when invoke should return error`() {
+    fun `when invoke error should return error`() {
 
         val errorMessage = "Error getting list of currencies"
         val error = Throwable(errorMessage)

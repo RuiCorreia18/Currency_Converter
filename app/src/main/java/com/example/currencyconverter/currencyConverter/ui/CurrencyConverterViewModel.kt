@@ -34,7 +34,6 @@ class CurrencyConverterViewModel @Inject constructor(
     init {
         //Get currency list fetched on currencyList from shared view model
         _currencyList.value = sharedViewModel.getCurrencyListLiveData().value
-        sharedViewModel.setCurrencyListLiveData(emptyList())
     }
 
     fun getCurrencyConversion(from: String, to: String, value: String) {
