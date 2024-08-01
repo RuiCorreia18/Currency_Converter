@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.currencyconverter.currencyConverter.domain.useCases.GetCurrencyConversionUseCase
+import com.example.currencyconverter.currencyConverter.domain.useCases.ManageCurrencyConversionHistoryUseCase
 import com.example.currencyconverter.shared.SharedViewModel
 import io.mockk.every
 import io.mockk.mockk
@@ -18,6 +19,7 @@ import org.junit.Test
 
 class CurrencyConverterViewModelTest {
     private val currencyConversionUseCase: GetCurrencyConversionUseCase = mockk()
+    private val manageCurrencyConversionHistoryUseCase: ManageCurrencyConversionHistoryUseCase = mockk()
     private val ioSchedulers: Scheduler = Schedulers.trampoline()
     private val mainSchedulers: Scheduler = Schedulers.trampoline()
     private val sharedViewModel: SharedViewModel = mockk()
@@ -33,13 +35,15 @@ class CurrencyConverterViewModelTest {
         val currencyListLiveData = MutableLiveData<List<String>>()
         currencyListLiveData.value = listOf("EUR", "USD", "GBP")
         every { sharedViewModel.getCurrencyListLiveData() } returns currencyListLiveData
+        every { manageCurrencyConversionHistoryUseCase.getCurrencyConversionHistory() } returns Single.just(emptyList())
 
         //need to setup viewmodel after all dependency are ready
         viewModel = CurrencyConverterViewModel(
             ioSchedulers,
             mainSchedulers,
             sharedViewModel,
-            currencyConversionUseCase
+            currencyConversionUseCase,
+            manageCurrencyConversionHistoryUseCase
         )
     }
 
@@ -66,7 +70,7 @@ class CurrencyConverterViewModelTest {
             currencyConversionUseCase(
                 fromCurrency,
                 toCurrency,
-                amount.toDouble()
+                amount
             )
         } returns Single.just(convertedAmount)
 
@@ -90,7 +94,7 @@ class CurrencyConverterViewModelTest {
             currencyConversionUseCase(
                 fromCurrency,
                 toCurrency,
-                amount.toDouble()
+                amount
             )
         } returns Single.error(error)
 

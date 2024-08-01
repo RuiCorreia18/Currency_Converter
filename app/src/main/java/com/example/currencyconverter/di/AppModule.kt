@@ -73,7 +73,7 @@ class AppModule {
     }
 
     @Provides
-    fun provideCatDao(appDatabase: CurrencyConverterDatabase): CurrencyConverterDao {
+    fun provideCurrencyConverterDao(appDatabase: CurrencyConverterDatabase): CurrencyConverterDao {
         return appDatabase.currencyConverterDao()
     }
 }

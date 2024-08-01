@@ -1,5 +1,6 @@
 package com.example.currencyconverter.currencyConverter.data
 
+import com.example.currencyconverter.currencyConverter.data.local.LocalDataSource
 import com.example.currencyconverter.currencyConverter.data.remote.RemoteDataSource
 import io.mockk.every
 import io.mockk.mockk
@@ -8,7 +9,8 @@ import org.junit.Test
 
 class CurrencyConverterRepositoryImplTest {
     private val remoteDataSource: RemoteDataSource = mockk()
-    private val repository = CurrencyConverterRepositoryImpl(remoteDataSource)
+    private val localDataSource: LocalDataSource = mockk()
+    private val repository = CurrencyConverterRepositoryImpl(remoteDataSource, localDataSource)
 
     @Test
     fun `should return correct conversion rate when API returns valid response`() {

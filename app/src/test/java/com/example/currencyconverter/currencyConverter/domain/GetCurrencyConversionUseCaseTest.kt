@@ -25,7 +25,7 @@ class GetCurrencyConversionUseCaseTest {
             )
         } returns Single.just(convertedAmount)
 
-        useCase(fromCurrency, toCurrency, amount)
+        useCase(fromCurrency, toCurrency, amount.toString())
             .test()
             .assertNoErrors()
             .assertValue(convertedAmount)
@@ -48,7 +48,7 @@ class GetCurrencyConversionUseCaseTest {
             )
         } returns Single.error(error)
 
-        useCase(fromCurrency, toCurrency, amount)
+        useCase(fromCurrency, toCurrency, amount.toString())
             .test()
             .assertNotComplete()
             .assertError(error)
