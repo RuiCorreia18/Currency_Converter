@@ -7,12 +7,21 @@
     android:layout_margin="@dimen/activity_vertical_margin"
     tools:context=".currencyConverter.ui.CurrencyConverterFragment">
 
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/conversionsHistorySpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/fromTV"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conversionsHistorySpinner"
+        android:layout_marginTop="18dp"
         android:textColor="@color/black"
         android:text="@string/from"/>
 

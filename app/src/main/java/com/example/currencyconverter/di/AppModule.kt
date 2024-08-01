@@ -1,7 +1,11 @@
 package com.example.currencyconverter.di
 
+import android.app.Application
+import androidx.room.Room
 import com.example.currencyconverter.currencyConverter.data.CurrencyConverterApi
 import com.example.currencyconverter.currencyConverter.data.CurrencyConverterRepositoryImpl
+import com.example.currencyconverter.currencyConverter.data.local.CurrencyConverterDao
+import com.example.currencyconverter.currencyConverter.data.local.CurrencyConverterDatabase
 import com.example.currencyconverter.currencyConverter.domain.CurrencyConverterRepository
 import com.example.currencyconverter.currencyList.data.CurrencyListApi
 import com.example.currencyconverter.currencyList.data.CurrencyListRepositoryImpl
@@ -57,6 +61,21 @@ class AppModule {
     @Provides
     @Singleton
     fun provideSharedViewModel(): SharedViewModel = SharedViewModel()
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(application: Application): CurrencyConverterDatabase {
+        return Room.databaseBuilder(
+            application.applicationContext,
+            CurrencyConverterDatabase::class.java,
+            "currency-database"
+        ).build()
+    }
+
+    @Provides
+    fun provideCatDao(appDatabase: CurrencyConverterDatabase): CurrencyConverterDao {
+        return appDatabase.currencyConverterDao()
+    }
 }
 
 @Module

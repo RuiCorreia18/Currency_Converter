@@ -10,12 +10,13 @@ class LocalDataSource @Inject constructor(
     fun getCurrencyConverterHistory(): Single<List<CurrencyConverterEntity>> =
         currencyConverterDao.getCurrencyConverterHistory()
 
-    fun insertCurrencyConversion(): Completable{
-        val valToInsert = CurrencyConverterEntity(
-            1,"EUR",1.00,"USD"
-        )
+    fun insertCurrencyConversion(
+        historyToInsert: CurrencyConverterEntity
+    ): Completable {
         return Completable.fromAction {
-            currencyConverterDao.insertCurrencyConversion(valToInsert)
+            currencyConverterDao.insertCurrencyConversion(
+                historyToInsert
+            )
         }
     }
 }

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SpinnerAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,8 +27,6 @@ class CurrencyConverterFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: CurrencyConverterViewModel by viewModels { viewModelFactory }
 
-    private lateinit var spinnerAdapter: SpinnerAdapter
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,7 +42,7 @@ class CurrencyConverterFragment : Fragment() {
 
         //Update spinner with currency list
         viewModel.currencyList.observe(viewLifecycleOwner) { codes ->
-            spinnerAdapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, codes)
+            val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, codes)
             with(binding) {
                 fromCurrencyCodeSpinner.adapter = spinnerAdapter
                 fromCurrencyCodeSpinner.setSelection(0)
@@ -53,6 +50,12 @@ class CurrencyConverterFragment : Fragment() {
                 //selection 1 so don't show the same currency
                 toCurrencyCodeSpinner.setSelection(1)
             }
+        }
+
+        //Update Spinner with conversion history
+        viewModel.conversionsHistoryList.observe(viewLifecycleOwner) { history ->
+            val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, history)
+            binding.conversionsHistorySpinner.adapter = spinnerAdapter
         }
 
         viewModel.currencyConversion.observe(viewLifecycleOwner) { conversion ->
@@ -65,14 +68,6 @@ class CurrencyConverterFragment : Fragment() {
 
         binding.fromCurrencyCodeSpinner.onItemSelectedListener = clearToValue()
         binding.toCurrencyCodeSpinner.onItemSelectedListener = clearToValue()
-
-        /**
-         * TODO
-         *  - on spinner change clear input values DONE
-         *  - fetch value to ask conversion DONE
-         *  - send and fill result of conversion DONE
-         *  - Dont allow enter on inputtext also numeric DONE
-         */
 
         binding.currencyConvertButton.setOnClickListener {
             val fromCurrency = binding.fromCurrencyCodeSpinner.selectedItem.toString()
