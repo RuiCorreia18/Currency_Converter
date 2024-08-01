@@ -1,12 +1,13 @@
 package com.example.currencyconverter.currencyConverter.data
 
+import com.example.currencyconverter.currencyConverter.data.remote.RemoteDataSource
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.rxjava3.core.Single
 import org.junit.Test
 
 class RemoteDataSourceTest {
-    private val converterApi: CurrencyConvertorApi = mockk()
+    private val converterApi: CurrencyConverterApi = mockk()
     private val remoteDataSource = RemoteDataSource(converterApi)
 
     @Test

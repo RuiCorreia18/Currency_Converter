@@ -3,7 +3,7 @@ package com.example.currencyconverter.currencyConverter.ui
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.example.currencyconverter.currencyConverter.domain.GetCurrencyConversionUseCase
+import com.example.currencyconverter.currencyConverter.domain.useCases.GetCurrencyConversionUseCase
 import com.example.currencyconverter.shared.SharedViewModel
 import io.mockk.every
 import io.mockk.mockk

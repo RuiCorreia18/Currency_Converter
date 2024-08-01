@@ -1,7 +1,7 @@
 package com.example.currencyconverter.di
 
+import com.example.currencyconverter.currencyConverter.data.CurrencyConverterApi
 import com.example.currencyconverter.currencyConverter.data.CurrencyConverterRepositoryImpl
-import com.example.currencyconverter.currencyConverter.data.CurrencyConvertorApi
 import com.example.currencyconverter.currencyConverter.domain.CurrencyConverterRepository
 import com.example.currencyconverter.currencyList.data.CurrencyListApi
 import com.example.currencyconverter.currencyList.data.CurrencyListRepositoryImpl
@@ -42,8 +42,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideCurrencyConvertorApi(retrofit: Retrofit): CurrencyConvertorApi {
-        return retrofit.create(CurrencyConvertorApi::class.java)
+    fun provideCurrencyConvertorApi(retrofit: Retrofit): CurrencyConverterApi {
+        return retrofit.create(CurrencyConverterApi::class.java)
     }
 
     @Provides

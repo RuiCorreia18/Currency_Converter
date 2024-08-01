@@ -1,5 +1,6 @@
 package com.example.currencyconverter.currencyConverter.domain
 
+import com.example.currencyconverter.currencyConverter.domain.useCases.GetCurrencyConversionUseCase
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.rxjava3.core.Single

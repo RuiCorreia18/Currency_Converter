@@ -66,6 +66,11 @@ dependencies {
     implementation(libs.dagger.android)
     implementation(libs.dagger.android.support)
 
+    // Room
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.rxjava3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

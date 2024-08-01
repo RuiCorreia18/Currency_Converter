@@ -3,7 +3,7 @@ package com.example.currencyconverter.currencyConverter.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.currencyconverter.currencyConverter.domain.GetCurrencyConversionUseCase
+import com.example.currencyconverter.currencyConverter.domain.useCases.GetCurrencyConversionUseCase
 import com.example.currencyconverter.shared.SharedViewModel
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
