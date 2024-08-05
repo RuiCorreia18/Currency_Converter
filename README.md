@@ -27,7 +27,7 @@ Android App for a currency converter using [Frankfurter API](https://www.frankfu
 
 1. [ ] Splash Screen
 2. [X] Search Currency
-3. [ ] Conversion history offline (Not Working Properly)
+3. [ ] Conversion history offline (Not Working Properly: @Insert on CurrencyConverterDao is not inserting. After checking the database and manually inserting data, the get works but inserting is not)
 4. [X] Tests
 
 
