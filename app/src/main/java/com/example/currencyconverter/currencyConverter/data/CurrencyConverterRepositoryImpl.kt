@@ -1,6 +1,5 @@
 package com.example.currencyconverter.currencyConverter.data
 
-import com.example.currencyconverter.currencyConverter.data.local.CurrencyConverterEntity
 import com.example.currencyconverter.currencyConverter.data.local.LocalDataSource
 import com.example.currencyconverter.currencyConverter.data.local.toDomainModel
 import com.example.currencyconverter.currencyConverter.data.remote.RemoteDataSource

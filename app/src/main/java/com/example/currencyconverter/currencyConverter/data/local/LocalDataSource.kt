@@ -1,9 +1,6 @@
 package com.example.currencyconverter.currencyConverter.data.local
 
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Single
-import javax.inject.Inject
-
+/*
 class LocalDataSource @Inject constructor(
     private val currencyConverterDao: CurrencyConverterDao
 ) {
@@ -19,4 +16,4 @@ class LocalDataSource @Inject constructor(
             )
         }
     }
-}
+}*/

@@ -1,7 +1,6 @@
 package com.example.currencyconverter
 
 import android.app.Application
-import com.example.currencyconverter.currencyConverter.data.local.CurrencyConverterDatabase
 import com.example.currencyconverter.di.AppComponent
 import com.example.currencyconverter.di.DaggerAppComponent
 import javax.inject.Inject

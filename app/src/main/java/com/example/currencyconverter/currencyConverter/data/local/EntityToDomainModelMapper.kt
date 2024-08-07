@@ -1,7 +1,6 @@
 package com.example.currencyconverter.currencyConverter.data.local
 
-import com.example.currencyconverter.currencyConverter.domain.CurrencyConverterDomainModel
-
+/*
 fun List<CurrencyConverterEntity>.toDomainModel(): List<CurrencyConverterDomainModel> {
     return this.map {
         CurrencyConverterDomainModel(
@@ -19,3 +18,4 @@ fun CurrencyConverterEntity.toDomainModel(): CurrencyConverterDomainModel {
         toCurrency = this.toCurrency,
     )
 }
+*/
